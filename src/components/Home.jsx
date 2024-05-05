@@ -42,7 +42,7 @@ function Home () {
             máximo hasta lograr encontrar una solución. <br />
             También cuando hay mentas establecidas siempre trabajo en <br />
             ellas hasta alcanzarlas.
-            
+
         </p>
     );
     
@@ -77,10 +77,7 @@ function Home () {
                                 SQL
                             </div>
                         </div>
-
-
                     </div>
-                    
                 </div>
             );
                 break;
@@ -171,9 +168,12 @@ function Home () {
                 break;
             case 'analisis':
                 setContenidoHabilidad(
-                    <div className='bg-[#BACD92] rounded-lg'>
+                    <div className='bg-[#BACD92] rounded-lg p-5 ' style={{ backgroundImage: `url('https://example.com/image.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                         
-                        <div className="navbar bg-[#0A6847]">
+                        <div style={{
+                            animation: 'fadeInScale 350ms ease-in-out forwards'
+                            }}> 
+                        <div className="navbar bg-[#0A6847] ">
                             <div className="navbar-start">
                                 <div className="dropdown">
                                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -420,7 +420,7 @@ function Home () {
                                 </table>
                             </div>
                         </div>
-                        
+                        </div>
                     </div>
                 );
                 break;
@@ -428,44 +428,44 @@ function Home () {
                 setContenidoHabilidad(
                     <div className='bg-[#FFE6E6] rounded-lg'>
                         <div className='grid grid-cols-2 gap-4 mt-5 p-8'>
-                            <div className="card card-side bg-[#7469B6] shadow-xl">
-                                <figure className=''><img className='h-1/2 rounded-lg bg-[#FFE0B5] ml-5' src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/53bb0a5c8ce69193bdf63243aa968925ab60842e/image/idea.jpg" alt="Movie"/></figure>
+                            <div className="card card-side bg-[#7469B6] shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:scale-110">
+                                <figure className='w-1/3'><img className='w-full h-full object-cover rounded-l-lg' src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/53bb0a5c8ce69193bdf63243aa968925ab60842e/image/idea.jpg" alt="Mente analítica"/></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">Mente analítica</h2>
-                                    <p>{texto1}</p>
-                                    <div className="card-actions justify-end">
-                                    
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card card-side bg-[#AD88C6] shadow-xl">
-                                <figure><img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure>
-                                <div className="card-body">
-                                    <h2 className="card-title">Adaptación</h2>
-                                    <p>{texto2}</p>
+                                    <h2 className="card-title text-white">Mente analítica</h2>
+                                    <p className="text-white">{texto1}</p>
                                     <div className="card-actions justify-end">
                                     </div>
                                 </div>
                             </div>
-                            <div className="card card-side bg-[#AD88C6] shadow-xl">
-                                <figure><img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure>
+                            <div className="card card-side bg-[#AD88C6] shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:scale-110">
+                                <figure className='w-1/3'><img className='w-full h-full object-cover rounded-l-lg' src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/plastilina.jpg" alt="Adaptación"/></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">Proactivo</h2>
-                                    <p>{texto3}</p>
+                                    <h2 className="card-title text-white">Adaptación</h2>
+                                    <p className="text-white">{texto2}</p>
                                     <div className="card-actions justify-end">
                                     </div>
                                 </div>
                             </div>
-                            <div className="card card-side bg-[#7469B6] shadow-xl">
-                                <figure><img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure>
+                            <div className="card card-side bg-[#AD88C6] shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:scale-110">
+                                <figure className='w-1/3'><img className='w-full h-full object-cover rounded-l-lg' src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/solucion.jpg" alt="Proactivo"/></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">Percistencia</h2>
-                                    <p>{texto4}</p>
+                                    <h2 className="card-title text-white">Proactivo</h2>
+                                    <p className="text-white">{texto3}</p>
+                                    <div className="card-actions justify-end">
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card card-side bg-[#7469B6] shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:scale-110">
+                                <figure className='w-1/3'><img className='w-full h-full object-cover rounded-l-lg' src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/rocas.jpg" alt="Percistencia"/></figure>
+                                <div className="card-body">
+                                    <h2 className="card-title text-white">Persistencia</h2>
+                                    <p className="text-white">{texto4}</p>
                                     <div className="card-actions justify-end">
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         
                     </div>
                 );

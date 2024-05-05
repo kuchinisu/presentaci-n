@@ -38,3 +38,15 @@
         opacity: 1;
     }
 }
+
+
+@keyframes fadeInScale {
+  from {
+      
+      transform: scale(0.1); 
+  }
+  to {
+      
+      transform: scale(1); 
+  }
+}
