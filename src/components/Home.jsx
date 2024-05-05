@@ -5,8 +5,19 @@ function Home () {
 
     const textoDePresentacion = (
         <p>
-            Soy Rodolfo Escamilla, soy una persona sumamente analítica. 🤓☝️<br />
-            Tengo un fuerte impulso por siempre buscar soluciones,
+           <div>
+                👨‍💻Desarrollador Full-Stack de apps web y apps de escritorio con los lenguajes de <span className='bg-[#03AED2] p-1 font-bold text-gray-500 rounded-md'>Py</span><span className='bg-[#FDDE55] p-1 font-bold text-gray-500 rounded-md'>thon</span>, <span className='bg-[#F3CA52] text-white p-1 rounded-md font-bold'>Javascript</span>, <span className='bg-gray-300 p-1 rounded-sm font-bold'>SQL</span>, <span className='bg-blue-200 p-1 text-white font-bold'>C++</span>. <br />
+                🖨️Administración y análisis de datos con Excel. <br />
+            </div>
+
+            <br />
+
+            🍓Soy un gran amante de los números, la estádistica y la técnología, tengo la 
+            idea de que cualquier cosa en esta vida se puede entender a travéz de una 
+            gráfica. Aunque mi principal fuerte es el backend, el manejo y visualización de datos y
+            otro tipo de herramientas de apoyo como Excel y google cloud tambén me desempeño 
+            como desarrollador de front-end. 🍓
+
         </p>
     );
 
@@ -168,10 +179,10 @@ function Home () {
                 break;
             case 'analisis':
                 setContenidoHabilidad(
-                    <div className='bg-[#BACD92] rounded-lg p-5 ' style={{ backgroundImage: `url('https://example.com/image.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                    <div className='bg-[#BACD92] rounded-lg p-5 ' style={{ backgroundImage: `url('https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/paisaje.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
                         
                         <div style={{
-                            animation: 'fadeInScale 350ms ease-in-out forwards'
+                            animation: 'fadeInScale 450ms ease-in-out forwards'
                             }}> 
                         <div className="navbar bg-[#0A6847] ">
                             <div className="navbar-start">
@@ -489,7 +500,7 @@ function Home () {
 
                     <div className="mt-5 bg-[#FCFFE0] flex">
                         <div className="flex-grow p-5">
-                            <h1 className="text-xl font-bold text-[#1A4D2E]">Sobre mí</h1>
+                            <h1 className="text-xl font-bold text-[#1A4D2E]">¡Hola!, soy Rodolfo Escamilla</h1>
                             <div className="text-[#4F6F52]">
                             {textoDePresentacion}
                             </div>
@@ -556,7 +567,7 @@ function Home () {
                             -Likear posts.
                             </p>
                             <div className="card-actions justify-end">
-                            <a className="btn btn-primary" target="_blank" href="https://drive.google.com/drive/folders/1Tky5_lZMpqGmG4WfV-IvdnAYt-SunI0W?usp=sharing">Listen</a>
+                            <a className="btn btn-primary" target="_blank" href="https://github.com/kuchinisu/panArt.git">Listen</a>
                             </div>
                         </div>
                     </div>
