@@ -556,7 +556,7 @@ function Home () {
             
                 <div> 
                     <div className="card lg:card-side bg-[#BACD92] shadow-xl m-5">
-                        <figure><img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/></figure>
+                        <figure><img src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/blog.png" alt="Album"/></figure>
                         <div className="card-body">
                             <h2 className="card-title text-white">Blog react+Django</h2>
                             <p className="text-white">
@@ -573,7 +573,7 @@ function Home () {
                     </div>
 
                     <div className="card lg:card-side bg-[#BACD92] shadow-xl m-5">
-                        <figure><img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/></figure>
+                        <figure><img src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/excelreact.png" alt="Album"/></figure>
                         <div className="card-body">
                             <h2 className="card-title text-white">Excel QueryPower + Django</h2>
                             <p className="text-white">
@@ -586,7 +586,7 @@ function Home () {
                     </div>
 
                     <div className="card lg:card-side bg-[#BACD92] shadow-xl m-5">
-                        <figure><img src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album"/></figure>
+                        <figure><img src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/dashboard.png" alt="Album"/></figure>
                         <div className="card-body">
                             <h2 className="card-title text-white">Dashboard de Excel</h2>
                             <p className="text-white">Dashboard interactivo de excel que no solo permite visualizar los datos, si no que tambien permite añadir datos de forma automaitca a travez del mismo dashboard, usando una tabla como formulario, funciona con logica de las formilas y con Visual Basic</p>
