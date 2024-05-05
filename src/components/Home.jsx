@@ -16,6 +16,37 @@ function Home () {
         </div>
     );
 
+    const texto1 =  (
+        <p>
+            Siempre ante cualquier problema observo todos los ángulos posibles, <br />
+            trato de evaluar todas las soluciones y ecuentro una solución efectiva
+        </p>
+    );
+    const texto2 =  (
+        <p>
+            Nunca me cierro a aprender nuevas habilidades, y afortunadamente, <br />
+            mi gran gusto viene acompañado de una buena capacidad de aprendizaje rápido,  <br />
+            soy una persona adaptable a distintas formas de trabajar, a herramientas, etc. <br />
+        </p>
+    );
+    const texto3 =  (
+        <p>
+            Siempre trato de aportar lo más posible ofreciendo soluciones, <br />
+            herramientas, ideas y puntos en diferentes situaciónes.
+        </p>
+    );
+    const texto4 =  (
+        <p>
+            Siempre me quedo hasta el final para resolver algún problema <br />
+            incluso si son pocas las herramientas o recursos me esfuerzo al <br />
+            máximo hasta lograr encontrar una solución. <br />
+            También cuando hay mentas establecidas siempre trabajo en <br />
+            ellas hasta alcanzarlas.
+            
+        </p>
+    );
+    
+
     const [contenidoHabilidad, setContenidoHabilidad] = useState(null);
     const [inProp, setInProp] = useState(false);
     const [isActive, setIsActive] = useState(false);
@@ -395,45 +426,42 @@ function Home () {
                 break;
             case 'cualitativos':
                 setContenidoHabilidad(
-                    <div className='bg-[#BACD92] rounded-lg'>
+                    <div className='bg-[#FFE6E6] rounded-lg'>
                         <div className='grid grid-cols-2 gap-4 mt-5 p-8'>
-                            <div className="card card-side bg-base-100 shadow-xl">
-                                <figure><img src="https://www.freepik.com/free-vector/businessman-get-idea_1091808.htm#fromView=search&page=1&position=1&uuid=de75d2b6-e91c-4b15-81db-215ff8869980" alt="Movie"/></figure>
+                            <div className="card card-side bg-[#7469B6] shadow-xl">
+                                <figure className=''><img className='h-1/2 rounded-lg bg-[#FFE0B5] ml-5' src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/53bb0a5c8ce69193bdf63243aa968925ab60842e/image/idea.jpg" alt="Movie"/></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">New movie is released!</h2>
-                                    <p>Click the button to watch on Jetflix app.</p>
+                                    <h2 className="card-title">Mente analítica</h2>
+                                    <p>{texto1}</p>
                                     <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Watch</button>
+                                    
                                     </div>
                                 </div>
                             </div>
-                            <div className="card card-side bg-base-100 shadow-xl">
+                            <div className="card card-side bg-[#AD88C6] shadow-xl">
                                 <figure><img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">New movie is released!</h2>
-                                    <p>Click the button to watch on Jetflix app.</p>
+                                    <h2 className="card-title">Adaptación</h2>
+                                    <p>{texto2}</p>
                                     <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Watch</button>
                                     </div>
                                 </div>
                             </div>
-                            <div className="card card-side bg-base-100 shadow-xl">
+                            <div className="card card-side bg-[#AD88C6] shadow-xl">
                                 <figure><img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">New movie is released!</h2>
-                                    <p>Click the button to watch on Jetflix app.</p>
+                                    <h2 className="card-title">Proactivo</h2>
+                                    <p>{texto3}</p>
                                     <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Watch</button>
                                     </div>
                                 </div>
                             </div>
-                            <div className="card card-side bg-base-100 shadow-xl">
+                            <div className="card card-side bg-[#7469B6] shadow-xl">
                                 <figure><img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie"/></figure>
                                 <div className="card-body">
-                                    <h2 className="card-title">New movie is released!</h2>
-                                    <p>Click the button to watch on Jetflix app.</p>
+                                    <h2 className="card-title">Percistencia</h2>
+                                    <p>{texto4}</p>
                                     <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Watch</button>
                                     </div>
                                 </div>
                             </div>
