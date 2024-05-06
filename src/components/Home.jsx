@@ -403,7 +403,7 @@ function Home () {
                     Habilidades
                 </h>
 
-                <div id='presiona' className="text-gray-500 ml-80">Presionar:</div>
+                <div id='presiona' className=" ml-80 font-bold text-[#1A4D2E]">Presionar:</div>
 
                 <div className="flex justify-center gap-4 mt-5">
                     <button onClick={() => cambiarVentanaDeHabilidades('backend')} className="px-4 py-2 bg-[#AD88C6] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
