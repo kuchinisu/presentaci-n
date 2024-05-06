@@ -1,7 +1,86 @@
 import {useState} from 'react';
 import { CSSTransition } from 'react-transition-group';
-import '../transitions.css'
+import '../transitions.css';
+import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
+import { MainContainer, ChatContainer, MessageList, Message, 
+    MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
+import {Tabla} from './tabla';
+import {prompts} from '../txt/propts'
+
 function Home () {
+
+    const API_KEY = 'api';
+
+    console.log('api', API_KEY)
+
+    const [messages, setMessages] = useState([
+        {
+            message: "Hola! soy rodo-bot y te contaré lo que necesites sobre Rodolfo",
+            sender: "ChatGPT",
+        }
+    ]);
+    const [isTyping, setIsTyping] = useState(false);
+    const handleSend = async (message) => {
+        const newMessage = {
+          message,
+          direction: 'outgoing',
+          sender: "user"
+        };
+    
+        const newMessages = [...messages, newMessage];
+        
+        setMessages(newMessages);
+        setIsTyping(true);
+
+        await processMesageToChatGPT (newMessages);
+    };
+
+    async function processMesageToChatGPT(chatMessages) {
+        let apiMessages = chatMessages.map((messageObject) => {
+            let role = "";
+            if(messageObject.sender === "ChatGPT") {
+                role="assistant";
+
+            } else {
+                role = "user"
+            };
+            return { role: role, content: messageObject.message }
+
+        });
+
+        const systemMessage = {
+            role: "system",
+            content: prompts
+        }
+
+        const apiRequestBody = {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                systemMessage,
+                ...apiMessages
+            ]
+        }
+
+        await fetch("https://api.openai.com/v1/chat/completions", 
+            {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + API_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(apiRequestBody)
+            }).then((data) => {
+            return data.json();
+            }).then((data) => {
+            console.log(data);
+            setMessages([...chatMessages, {
+                message: data.choices[0].message.content,
+                sender: "ChatGPT"
+            }]);
+            setIsTyping(false);
+            });
+            }
+    
 
     const textoDePresentacion = (
         <p>
@@ -14,11 +93,13 @@ function Home () {
 
             🍓Soy un gran amante de los números, la estádistica y la técnología, tengo la 
             idea de que cualquier cosa en esta vida se puede entender a travéz de una 
-            gráfica. Aunque mi principal fuerte es el backend, el manejo y visualización de datos y
+            gráfica. <div className='text-[#32012F]'>Aunque mi principal fuerte es el backend, el manejo y visualización de datos y
             otro tipo de herramientas de apoyo como Excel y google cloud tambén me desempeño 
-            como desarrollador de front-end. 🍓
+            como desarrollador de front-end.</div> 🍓
 
         </p>
+
+        
     );
 
     const backend = (
@@ -64,6 +145,7 @@ function Home () {
     
     const cambiarVentanaDeHabilidades = (id) => {
         setInProp(false);
+        document.getElementById("presiona").innerText = '';
         switch (id) {
             case 'backend':
                 setContenidoHabilidad(
@@ -223,212 +305,7 @@ function Home () {
 
                         <div className='bg-white'>
                             <div className="overflow-x-auto">
-                                <table className="table table-xs table-pin-cols ">
-                                    <thead className=''>
-                                    <tr>
-                                        <th></th> 
-                                        <th>Name</th> 
-                                        <th>Job</th> 
-                                        <th>company</th> 
-                                        <th>location</th> 
-                                        <th>Last Login</th> 
-                                        <th>Favorite Color</th>
-                                    </tr>
-                                    </thead> 
-                                    <tbody>
-                                    <tr>
-                                        <th>1</th> 
-                                        <td>Cy Ganderton</td> 
-                                        <td>Quality Control Specialist</td> 
-                                        <td>Littel, Schaden and Vandervort</td> 
-                                        <td>Canada</td> 
-                                        <td>12/16/2020</td> 
-                                        <td>Blue</td>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th> 
-                                        <td>Hart Hagerty</td> 
-                                        <td>Desktop Support Technician</td> 
-                                        <td>Zemlak, Daniel and Leannon</td> 
-                                        <td>United States</td> 
-                                        <td>12/5/2020</td> 
-                                        <td>Purple</td>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th> 
-                                        <td>Brice Swyre</td> 
-                                        <td>Tax Accountant</td> 
-                                        <td>Carroll Group</td> 
-                                        <td>China</td> 
-                                        <td>8/15/2020</td> 
-                                        <td>Red</td>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th> 
-                                        <td>Marjy Ferencz</td> 
-                                        <td>Office Assistant I</td> 
-                                        <td>Rowe-Schoen</td> 
-                                        <td>Russia</td> 
-                                        <td>3/25/2021</td> 
-                                        <td>Crimson</td>
-                                    </tr>
-                                    <tr>
-                                        <th>5</th> 
-                                        <td>Yancy Tear</td> 
-                                        <td>Community Outreach Specialist</td> 
-                                        <td>Wyman-Ledner</td> 
-                                        <td>Brazil</td> 
-                                        <td>5/22/2020</td> 
-                                        <td>Indigo</td>
-                                    </tr>
-                                    <tr>
-                                        <th>6</th> 
-                                        <td>Irma Vasilik</td> 
-                                        <td>Editor</td> 
-                                        <td>Wiza, Bins and Emard</td> 
-                                        <td>Venezuela</td> 
-                                        <td>12/8/2020</td> 
-                                        <td>Purple</td>
-                                    </tr>
-                                    <tr>
-                                        <th>7</th> 
-                                        <td>Meghann Durtnal</td> 
-                                        <td>Staff Accountant IV</td> 
-                                        <td>Schuster-Schimmel</td> 
-                                        <td>Philippines</td> 
-                                        <td>2/17/2021</td> 
-                                        <td>Yellow</td>
-                                    </tr>
-                                    <tr>
-                                        <th>8</th> 
-                                        <td>Sammy Seston</td> 
-                                        <td>Accountant I</td> 
-                                        <td>O'Hara, Welch and Keebler</td> 
-                                        <td>Indonesia</td> 
-                                        <td>5/23/2020</td> 
-                                        <td>Crimson</td>
-                                    </tr>
-                                    <tr>
-                                        <th>9</th> 
-                                        <td>Lesya Tinham</td> 
-                                        <td>Safety Technician IV</td> 
-                                        <td>Turner-Kuhlman</td> 
-                                        <td>Philippines</td> 
-                                        <td>2/21/2021</td> 
-                                        <td>Maroon</td>
-                                    </tr>
-                                    <tr>
-                                        <th>10</th> 
-                                        <td>Zaneta Tewkesbury</td> 
-                                        <td>VP Marketing</td> 
-                                        <td>Sauer LLC</td> 
-                                        <td>Chad</td> 
-                                        <td>6/23/2020</td> 
-                                        <td>Green</td>
-                                    </tr>
-                                    <tr>
-                                        <th>11</th> 
-                                        <td>Andy Tipple</td> 
-                                        <td>Librarian</td> 
-                                        <td>Hilpert Group</td> 
-                                        <td>Poland</td> 
-                                        <td>7/9/2020</td> 
-                                        <td>Indigo</td>
-                                    </tr>
-                                    <tr>
-                                        <th>12</th> 
-                                        <td>Sophi Biles</td> 
-                                        <td>Recruiting Manager</td> 
-                                        <td>Gutmann Inc</td> 
-                                        <td>Indonesia</td> 
-                                        <td>2/12/2021</td> 
-                                        <td>Maroon</td>
-                                    </tr>
-                                    <tr>
-                                        <th>13</th> 
-                                        <td>Florida Garces</td> 
-                                        <td>Web Developer IV</td> 
-                                        <td>Gaylord, Pacocha and Baumbach</td> 
-                                        <td>Poland</td> 
-                                        <td>5/31/2020</td> 
-                                        <td>Purple</td>
-                                    </tr>
-                                    <tr>
-                                        <th>14</th> 
-                                        <td>Maribeth Popping</td> 
-                                        <td>Analyst Programmer</td> 
-                                        <td>Deckow-Pouros</td> 
-                                        <td>Portugal</td> 
-                                        <td>4/27/2021</td> 
-                                        <td>Aquamarine</td>
-                                    </tr>
-                                    <tr>
-                                        <th>15</th> 
-                                        <td>Moritz Dryburgh</td> 
-                                        <td>Dental Hygienist</td> 
-                                        <td>Schiller, Cole and Hackett</td> 
-                                        <td>Sri Lanka</td> 
-                                        <td>8/8/2020</td> 
-                                        <td>Crimson</td>
-                                    </tr>
-                                    <tr>
-                                        <th>16</th> 
-                                        <td>Reid Semiras</td> 
-                                        <td>Teacher</td> 
-                                        <td>Sporer, Sipes and Rogahn</td> 
-                                        <td>Poland</td> 
-                                        <td>7/30/2020</td> 
-                                        <td>Green</td>
-                                    </tr>
-                                    <tr>
-                                        <th>17</th> 
-                                        <td>Alec Lethby</td> 
-                                        <td>Teacher</td> 
-                                        <td>Reichel, Glover and Hamill</td> 
-                                        <td>China</td> 
-                                        <td>2/28/2021</td> 
-                                        <td>Khaki</td>
-                                    </tr>
-                                    <tr>
-                                        <th>18</th> 
-                                        <td>Aland Wilber</td> 
-                                        <td>Quality Control Specialist</td> 
-                                        <td>Kshlerin, Rogahn and Swaniawski</td> 
-                                        <td>Czech Republic</td> 
-                                        <td>9/29/2020</td> 
-                                        <td>Purple</td>
-                                    </tr>
-                                    <tr>
-                                        <th>19</th> 
-                                        <td>Teddie Duerden</td> 
-                                        <td>Staff Accountant III</td> 
-                                        <td>Pouros, Ullrich and Windler</td> 
-                                        <td>France</td> 
-                                        <td>10/27/2020</td> 
-                                        <td>Aquamarine</td>
-                                    </tr>
-                                    <tr>
-                                        <th>20</th> 
-                                        <td>Lorelei Blackstone</td> 
-                                        <td>Data Coordiator</td> 
-                                        <td>Witting, Kutch and Greenfelder</td> 
-                                        <td>Kazakhstan</td> 
-                                        <td>6/3/2020</td> 
-                                        <td>Red</td>
-                                    </tr>
-                                    </tbody> 
-                                    <tfoot>
-                                    <tr>
-                                        <th></th> 
-                                        <th>Name</th> 
-                                        <th>Job</th> 
-                                        <th>company</th> 
-                                        <th>location</th> 
-                                        <th>Last Login</th> 
-                                        <th>Favorite Color</th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                                {<Tabla/>}
                             </div>
                         </div>
                         </div>
@@ -476,8 +353,6 @@ function Home () {
                                 </div>
                             </div>
                         </div>
-
-                        
                     </div>
                 );
                 break;
@@ -487,13 +362,12 @@ function Home () {
         }
     };
 
-
     return (
         <>
             <div className="bg-[#FCFFE0]">
                 
                 <div className="navbar bg-[#F5DAD2]">
-                    <a className="btn btn-ghost text-xl">Rodolfo</a>
+                    <a className="btn btn-ghost text-xl text-[#1A4D2E] ">🌸Rodolfo🌸</a>
                 </div>
 
                 <div className="bg-[#FCFFE0]">
@@ -502,7 +376,14 @@ function Home () {
                         <div className="flex-grow p-5">
                             <h1 className="text-xl font-bold text-[#1A4D2E]">¡Hola!, soy Rodolfo Escamilla</h1>
                             <div className="text-[#4F6F52]">
-                            {textoDePresentacion}
+                                {textoDePresentacion}
+                            
+                            </div>
+                            <div className='flex'>
+                            <a target="_blank" href="https://github.com/kuchinisu" className="btn btn-accent m-2">github</a>
+                            <a className="btn btn-accent m-2" target="_blank" href="https://www.linkedin.com/in/rodolfo-emmanuel-escamilla-tabares-57461924a/">Linkedin</a>
+                            <a target="_blank" href="https://drive.google.com/drive/folders/1DgQ_kspgb9Pj2CwGB5d0pPZTbVAruzrH?usp=sharing" className="btn btn-accent m-2">cv</a>
+
                             </div>
                         </div>
 
@@ -519,44 +400,83 @@ function Home () {
                     <div className="divider divider-warning opacity-30"></div>
                 </div>
 
-                <h className="font-bold text-[#1A4D2E]" >
+                <h className="font-bold text-[#1A4D2E] text-xl ml-5" >
                     Habilidades
                 </h>
 
+                <div id='presiona' className="text-gray-500 ml-80">Presionar:</div>
+
                 <div className="flex justify-center gap-4 mt-5">
-                    <button onClick={() => cambiarVentanaDeHabilidades('backend')} className="px-4 py-2 bg-[#F5DAD2] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
+                    <button onClick={() => cambiarVentanaDeHabilidades('backend')} className="px-4 py-2 bg-[#AD88C6] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
                         Backend
                     </button>
-                    <button onClick={() => cambiarVentanaDeHabilidades('frontend')} className="px-4 py-2 bg-[#F5DAD2] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
+                    <button onClick={() => cambiarVentanaDeHabilidades('frontend')} className="px-4 py-2 bg-[#AD88C6] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
                         Frontend
                     </button>
-                    <button onClick={() => cambiarVentanaDeHabilidades('analisis')} className="px-4 py-2 bg-[#F5DAD2] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
+                    <button onClick={() => cambiarVentanaDeHabilidades('analisis')} className="px-4 py-2 bg-[#AD88C6] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
                         Análisis
                     </button>
-                    <button onClick={() => cambiarVentanaDeHabilidades('cualitativos')} className="px-4 py-2 bg-[#F5DAD2] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
+                    <button onClick={() => cambiarVentanaDeHabilidades('cualitativos')} className="px-4 py-2 bg-[#AD88C6] text-white font-semibold rounded-lg shadow-md hover:bg-[#1A4D2E] focus:outline-none focus:ring-2 focus:ring-[#75A47F] focus:ring-opacity-50">
                         Cualitativos
                     </button>
+
                 </div>
+
 
                 <CSSTransition in={inProp} timeout={500} classNames="content">
                     <div className='m-5 ml-24 mr-24'>
                         {contenidoHabilidad}
+                        
                     </div>
+                    
                 </CSSTransition>
 
+                
+                <div className='divider divider-warning opacity-30'></div>
+                <div className='bg-blue-100 '>
+                    <h className="font-bold text-lg text-[#1A4D2E] pl-5">Quieres saber más de mí? Chatea con Rodo-Bot!</h>
+
+                    <div className='flex justify-center '>
+                        <div style={{
+                            position: "relative", 
+                            height: "600px", 
+                            width: "900px", 
+                            borderRadius: "20px", 
+                            overflow: "hidden",
+                            
+                        }}>
+                            <MainContainer>
+                                <ChatContainer>
+                                    <MessageList scrollBehavior="smooth" typingIndicator={isTyping ? <TypingIndicator content="Rodo-bot está escribiendo" /> : null}>
+                                        {messages.map((message, i) => (
+                                            <div key={i} className={`message ${message.sender === 'ChatGPT' ? 'message-gpt' : 'message-user'}`}>
+                                                {message.message}
+                                            </div>
+                                        ))}
+                                    </MessageList>
+
+                                    <MessageInput placeholder="di algo" onSend={handleSend} />
+                                </ChatContainer>
+                            </MainContainer>
+                        </div>
+                    </div>
+
+                </div>
+
+                
                 <div>
                     <div className="divider divider-warning opacity-30"></div>
                 </div>
 
                 <div>
-                    <h className="font-bold text-lg text-[#1A4D2E]" >proyectos</h>
+                    <h className="font-bold text-lg text-[#1A4D2E] text-xl ml-5" >proyectos</h>
                 </div>
                 </div>
 
             
                 <div> 
                     <div className="card lg:card-side bg-[#BACD92] shadow-xl m-5">
-                        <figure><img src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/blog.png" alt="Album"/></figure>
+                        <figure><img src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/blog1.png" alt="Album"/></figure>
                         <div className="card-body">
                             <h2 className="card-title text-white">Blog react+Django</h2>
                             <p className="text-white">
@@ -567,7 +487,7 @@ function Home () {
                             -Likear posts.
                             </p>
                             <div className="card-actions justify-end">
-                            <a className="btn btn-primary" target="_blank" href="https://github.com/kuchinisu/panArt.git">Listen</a>
+                            <a className="btn btn-primary" target="_blank" href="https://github.com/kuchinisu/panArt.git">Github</a>
                             </div>
                         </div>
                     </div>
@@ -580,7 +500,7 @@ function Home () {
                                 Este proyecto permite el procesamiento de datos financieros y de recursos húmanos de una base MySQL a travez de django, las tablas de exel se actualizan con request al servidor de django que usa MySQL
                             </p>
                             <div className="card-actions justify-end">
-                            <a className="btn btn-primary" target="_blank" href="https://drive.google.com/drive/folders/1id2I-5GXN1JChF0oYAbDr_tdSX50Z7lY?usp=sharing">Listen</a>
+                            <a className="btn btn-primary" target="_blank" href="https://github.com/kuchinisu/django-Excel.git">Github</a>
                             </div>
                         </div>
                     </div>
@@ -591,12 +511,25 @@ function Home () {
                             <h2 className="card-title text-white">Dashboard de Excel</h2>
                             <p className="text-white">Dashboard interactivo de excel que no solo permite visualizar los datos, si no que tambien permite añadir datos de forma automaitca a travez del mismo dashboard, usando una tabla como formulario, funciona con logica de las formilas y con Visual Basic</p>
                             <div className="card-actions justify-end">
-                            <a className="btn btn-primary" target="_blank" href="https://drive.google.com/drive/folders/1eQO0wG-6vZxbivJKttvGaGsnjNsGecsw?usp=sharing">Listen</a>
+                            <a className="btn btn-primary" target="_blank" href="https://drive.google.com/drive/folders/1eQO0wG-6vZxbivJKttvGaGsnjNsGecsw?usp=sharing">Drive</a>
                             </div>
                         </div>
                     </div>
             
                 </div>
+
+                <footer className="bg-[#212121]  footer items-center p-4 text-neutral-content">
+                    <aside className="items-center grid-flow-col">
+                        <svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" className="fill-current"><path d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path></svg> 
+                        <p>Gracias por su atención</p>
+                    </aside> 
+                    <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+                        <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
+                        <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+                    </nav>
+                </footer>
             </div>
         </>
     )
