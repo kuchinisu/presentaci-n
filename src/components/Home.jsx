@@ -9,9 +9,8 @@ import {prompts} from '../txt/propts'
 
 function Home () {
 
-    const API_KEY = 'api';
+    const API_KEY = process.env.REACT_APP_API_KEY_OPEN_AI;
 
-    console.log('api', API_KEY)
 
     const [messages, setMessages] = useState([
         {
