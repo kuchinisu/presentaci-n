@@ -388,7 +388,7 @@ function Home () {
 
                         <div className="avatar flex items-center justify-center p-8 mr-24 bg-[#BACD92] rounded-full shadow-around transition-all duration-300 ease-out hover:scale-110 hover:shadow-2xl hover:bg-[#A4C8A4]">
                             <div className="w-48 h-48 rounded-full ring ring-[#75A47F] ring-offset-base-100 ring-offset-2">
-                                <img src="https://scontent.fntr6-4.fna.fbcdn.net/v/t39.30808-6/431233835_6626407440792352_5572649842603056080_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mUPrhWnLDpUQ7kNvgG8mNz-&_nc_ht=scontent.fntr6-4.fna&oh=00_AfDfdqT38FAQWkLjKBCz5X7Y2_ix9SyvDX7R1MVaSH1X6w&oe=663A74CF" alt="Rodolfo Escamilla" />
+                                <img src="https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/static/foto_de_perfil.jpg" alt="Rodolfo Escamilla" />
                             </div>
                         </div>
 
