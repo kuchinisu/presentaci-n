@@ -2,11 +2,12 @@ import {useState} from 'react';
 import { CSSTransition } from 'react-transition-group';
 import '../transitions.css';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
-import { SobreMi } from './componentes/SobreM';
+import SobreMi from './componentes/SobreM';
 import Layout from './componentes/Layout';
 import Habilidades from './componentes/Habilidades';
-import Gpt from '../components/componentes/gpt'
 import Tarjetas from './componentes/Tarjetas';
+import Experiencia from './componentes/Experiencia';
+import Skills from './componentes/Skils';
 
 function Home () {
     const backend = (
@@ -27,18 +28,54 @@ function Home () {
                 
                 <Layout>
                     <SobreMi/>
-                    <div>
-                        <div className="divider divider-warning opacity-30"></div>
+                    
+                    <div className='p-5'>
+                        <Experiencia/>
                     </div>
-                    <Habilidades/>
-                    <div className=' '>
-                        <Gpt/>
+
+
+                    
+                    <div className="p-5">
                         <div>
                             <div className='divider'></div>
-                            <h className="font-bold text-lg text-[#1A4D2E] text-xl ml-5" >proyectos</h>
+                        </div>
+
+                        <div className='md:p-24'>
+                            <Tarjetas/>
                         </div>
                     </div>
-                    <Tarjetas/>
+
+                    <div className='p-5'>
+                        <div>
+
+                        <div className='divider'></div>
+
+                            <div className='flex justify-center'>
+                                <h className='font-bold text-3xl'>Fortalezas</h>
+                            </div>
+                            
+                            <div className='divider'></div>
+
+                            <div className='md:flex md:justify-center'>
+                                
+                                <div>
+                                    <div className='border border-warning border-2'>
+                                        <div className=' md:scale-125'>
+                                            <Habilidades/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className='border border-warning border-2'>
+                                    <Skills/>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    
+
                 </Layout>
             </div>
         </>

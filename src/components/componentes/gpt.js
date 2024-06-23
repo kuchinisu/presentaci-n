@@ -1,11 +1,10 @@
-import {useState} from 'react';
-import { MainContainer, ChatContainer, MessageList, Message, 
-    MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
-    import {prompts} from '../../txt/propts'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from "@chatscope/chat-ui-kit-react";
+import { prompts } from '../../txt/propts';
 
 const Gpt = () => {
     const API_KEY = process.env.REACT_APP_API_KEY_OPEN_AI;
-
 
     const [messages, setMessages] = useState([
         {
@@ -14,69 +13,67 @@ const Gpt = () => {
         }
     ]);
     const [isTyping, setIsTyping] = useState(false);
+
     const handleSend = async (message) => {
         const newMessage = {
-          message,
-          direction: 'outgoing',
-          sender: "user"
+            message,
+            direction: 'outgoing',
+            sender: "user"
         };
-    
+
         const newMessages = [...messages, newMessage];
         
         setMessages(newMessages);
         setIsTyping(true);
 
-        await processMesageToChatGPT (newMessages);
+        await processMesageToChatGPT(newMessages);
     };
 
     async function processMesageToChatGPT(chatMessages) {
-        let apiMessages = chatMessages.map((messageObject) => {
-            let role = "";
-            if(messageObject.sender === "ChatGPT") {
-                role="assistant";
-
-            } else {
-                role = "user"
-            };
-            return { role: role, content: messageObject.message }
-
-        });
+        const apiMessages = chatMessages.map((messageObject) => ({
+            role: messageObject.sender === "ChatGPT" ? "assistant" : "user",
+            content: messageObject.message
+        }));
 
         const systemMessage = {
             role: "system",
             content: prompts
-        }
+        };
 
-        const apiRequestBody = {
-            "model": "gpt-3.5-turbo",
-            "messages": [
-                systemMessage,
-                ...apiMessages
-            ]
-        }
-
-        await fetch("https://api.openai.com/v1/chat/completions", 
-            {
+        const options = {
             method: "POST",
+            url: "https://api.edenai.run/v2/text/chat",
             headers: {
-                "Authorization": "Bearer " + API_KEY,
+                authorization: `Bearer ${API_KEY}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(apiRequestBody)
-            }).then((data) => {
-            return data.json();
-            }).then((data) => {
-            console.log(data);
+            data: {
+                providers: ["openai"],
+                text: chatMessages[chatMessages.length - 1].message,
+                chatbot_global_action: "Act as an assistant",
+                previous_history: [
+                    systemMessage,
+                    ...apiMessages
+                ],
+                temperature: 0.5,
+                max_tokens: 150,
+            },
+        };
+
+        try {
+            const response = await axios.request(options);
+            const botMessage = response.data.generated_text;
             setMessages([...chatMessages, {
-                message: data.choices[0].message.content,
+                message: botMessage,
                 sender: "ChatGPT"
             }]);
             setIsTyping(false);
-            });
-            }
+        } catch (error) {
+            console.error(error);
+            setIsTyping(false);
+        }
+    };
 
-    
-    
     return(
         <div className="p-5 min-h-screen flex flex-col items-center">
             <h1 className="text-2xl font-bold mb-5 text-center">¿Quieres saber más de mí? ¡Chatea con el Rodo-bot!</h1>
