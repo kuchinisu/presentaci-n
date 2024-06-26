@@ -6,7 +6,7 @@ const Tarjetas = () => {
             titulo: "Base de datos De odontología",
             descripcion: "El proyecto es una app de django, que usa una base de datos MySQL, inspirado por una serie de detectives, cree una app que permite registrar pacientes, los modelos 3d de sus bocas, aparatos de ortodoncia etc. Además, permite subir el modelo 3d de la boca de otra persona, como la de un cuerpo no identificado para que la app busque parentezco entre los modelos 3d de todas las personas registradas en la base de datos.",
             imgSrc: "https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/blog1.png",
-            link: "https://github.com/kuchinisu/odontologia_nic.git"
+            link: "https://ursifi.vercel.app/"
         },
         {
             titulo: "Excel QueryPower + Django",
@@ -40,7 +40,7 @@ const Tarjetas = () => {
                             <h3 className="text-xl font-semibold font-mono text-[#1A4D2E]">{proyecto.titulo}</h3>
                             <p className="text-gray-600 mb-2">{proyecto.descripcion}</p>
                             
-                            <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" href={proyecto.link}>Ver en GitHub</a>
+                            <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" href={proyecto.link}>Ver proyecto</a>
                             <div className='divider'></div>
                         </div>
                         
