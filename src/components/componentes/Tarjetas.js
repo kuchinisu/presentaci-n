@@ -19,7 +19,13 @@ const Tarjetas = () => {
             descripcion: "Este dashboard interactivo muestra de forma gráfica la información de las ventas de una tienda de ropa, permite interactuar con las graficas y además tiene la funcion de registrar a travéz del mismo dashboard nuevas ventas y actualizarse automaticamente, usa una combinacion de VBA y la misma logica de las formulas de Excel.",
             imgSrc: "https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/dashboard.png",
             link: "https://drive.google.com/drive/folders/1eQO0wG-6vZxbivJKttvGaGsnjNsGecsw?usp=sharing"
-        }
+        },
+        {
+            titulo: "Articulo de análisis de datos",
+            descripcion: "Este es el más sencillo, pero le tengo cariño, ya que, es una de las cosas que a mí más me gustan, que es el explicar y tratar de ayudar a otros a entender del tema, en este articulo se da una introducción u orientación al análisis de datos, explicando como poco a poco se llega más profundo de los datos dispersos, y muestra todo e proceso de como se procesa un gran conjunto de datos, ua python, numpy, matplotlib y pandas.",
+            imgSrc: "https://raw.githubusercontent.com/kuchinisu/presentaci-n/main/image/dashboard.png",
+            link: "https://www.linkedin.com/pulse/orientaci%25C3%25B3n-al-an%25C3%25A1lisis-de-datos-rodolfo-emmanuel-escamilla-tabares-clyic/"
+        },
     ];
 
     return (
